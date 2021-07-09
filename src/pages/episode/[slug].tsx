@@ -30,7 +30,6 @@ type PageProps = {
 }
 
 export default function Episode({episode}:PageProps){
-    
     return(
         <div className={styles.episode}>
             <div className={styles.thumbContainer}>
@@ -59,8 +58,25 @@ export default function Episode({episode}:PageProps){
 }
 
 export const getStaticPaths:GetStaticPaths = async () =>{
+    const {data} = await api.get('episodes',{
+        params:{
+            _limit: 2,
+            _sort: 'published_at',
+            _order: 'desc'
+        }
+    })
+
+    const paths = data.map(ep=>{
+        return{
+            params:{
+                slug: ep.id
+            }
+        }
+    })
+
+
     return{
-        paths: [],
+        paths: paths,
         fallback: 'blocking'
     }
 }

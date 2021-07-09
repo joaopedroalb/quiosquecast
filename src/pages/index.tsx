@@ -1,4 +1,6 @@
 import { GetStaticProps } from "next";
+import { useContext } from "react";
+import { PlayerContext } from "../contexts/PlayerContext";
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -30,6 +32,17 @@ type HomeProps = {
 
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const {play} = useContext(PlayerContext)
+  const episodeFormat = (ep:Episode) =>{
+    return{
+      title: ep.title,
+      members: ep.members,
+      thumbnail: ep.thumbnail,
+      duration: ep.duration,
+      url: ep.url,
+    }
+  }
+
 
   return (
     <div className={styles.homePage}>
@@ -59,7 +72,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 </div>
 
                 <button type="button">
-                  <img src="/play-green.svg" alt="Play Episode" />
+                  <img src="/play-green.svg" alt="Play Episode" onClick={()=>{play(episodeFormat(ep))}} />
                 </button>
               </li>
             )
