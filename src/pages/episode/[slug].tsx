@@ -10,7 +10,10 @@ import ptBR from 'date-fns/locale/pt-BR'
 
 import { convertDurationToTimeString } from "../../Utils/convertDurationToTimeString";
 
+import { PlayerContext, usePlayer } from '../../contexts/PlayerContext';
+
 import styles from './episode.module.scss'
+import { useContext } from 'react'
 
 type Episode = {
     id: string,
@@ -30,6 +33,8 @@ type PageProps = {
 }
 
 export default function Episode({episode}:PageProps){
+    const {play} = usePlayer();
+
     return(
         <div className={styles.episode}>
             <div className={styles.thumbContainer}>
@@ -39,7 +44,7 @@ export default function Episode({episode}:PageProps){
                     </button>
                 </Link>
                 <Image width={700} height={320} src={episode.thumbnail} objectFit="cover"/>
-                <button type="button">
+                <button type="button" onClick={()=>play(episode)}>
                     <img src="/play.svg" alt="play podcast"/>
                 </button>
             </div>

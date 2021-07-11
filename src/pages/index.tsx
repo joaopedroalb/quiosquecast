@@ -1,6 +1,5 @@
 import { GetStaticProps } from "next";
-import { useContext } from "react";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext, usePlayer } from "../contexts/PlayerContext";
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -32,7 +31,10 @@ type HomeProps = {
 
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const {play} = useContext(PlayerContext)
+  const {play,playList} = usePlayer();
+
+  const episodeList = [...latestEpisodes,...allEpisodes];
+
   const episodeFormat = (ep:Episode) =>{
     return{
       title: ep.title,
@@ -50,7 +52,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <h2>Últimos lançamentos</h2>
 
         <ul>
-          {latestEpisodes.map(ep => {
+          {latestEpisodes.map((ep,index) => {
             return (
               <li key={ep.id}>
 
@@ -71,8 +73,8 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{ep.durationStr}</span>
                 </div>
 
-                <button type="button">
-                  <img src="/play-green.svg" alt="Play Episode" onClick={()=>{play(episodeFormat(ep))}} />
+                <button type="button" onClick={()=>{playList(episodeList,index)}}>
+                  <img src="/play-green.svg" alt="Play Episode"/>
                 </button>
               </li>
             )
@@ -96,7 +98,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           </thead>
 
           <tbody>
-            {allEpisodes.map(ep => {
+            {allEpisodes.map((ep,index) => {
               return (
                 <tr key={ep.id}>
                   <td style={{ width: 72 }}>
@@ -119,7 +121,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td style={{ width: 100 }}>{ep.publishedAt}</td>
                   <td>{ep.durationStr}</td>
                   <td>
-                    <button type="button">
+                    <button type="button" onClick={()=>{playList(episodeList,index+latestEpisodes.length)}}>
                       <img src="/play-green.svg" alt="play episode" />
                     </button>
                   </td>
