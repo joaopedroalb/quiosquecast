@@ -31,9 +31,14 @@ type HomeProps = {
 
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const {play,playList} = usePlayer();
-
+  const {
+    playList,
+    currentEpisodeIndex,
+    setPlayingState,
+    isPlaying
+  } = usePlayer();
   const episodeList = [...latestEpisodes,...allEpisodes];
+  let currentEpisode = episodeList[currentEpisodeIndex];
 
   const episodeFormat = (ep:Episode) =>{
     return{
@@ -44,7 +49,6 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
       url: ep.url,
     }
   }
-
 
   return (
     <div className={styles.homePage}>
@@ -121,8 +125,13 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <td style={{ width: 100 }}>{ep.publishedAt}</td>
                   <td>{ep.durationStr}</td>
                   <td>
-                    <button type="button" onClick={()=>{playList(episodeList,index+latestEpisodes.length)}}>
-                      <img src="/play-green.svg" alt="play episode" />
+                    <button type="button" onClick={()=>{
+                      ep.id === currentEpisode.id && isPlaying
+                      ? setPlayingState(false)
+                      : playList(episodeList,index+latestEpisodes.length)}}>
+                      { ep.id === currentEpisode.id && !isPlaying ? 
+                        <img src="/pauseEpisodes.svg" alt="pause" className={styles.buttonPauseEpisode}/>
+                        : <img src="/play-green.svg" alt="play episode" />}
                     </button>
                   </td>
                 </tr>

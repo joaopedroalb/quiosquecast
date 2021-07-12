@@ -138,7 +138,6 @@
         img{
             width: 2.5rem;
             height: 2.5rem;
-            border-radius: 0.5rem;
         }
 
         a{
@@ -174,5 +173,9 @@
             }
         }
         
+    }
+    .buttonPauseEpisode{
+        max-width: 40%;
+        max-height: 50%;
     }
 }
