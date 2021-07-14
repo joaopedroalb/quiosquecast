@@ -129,7 +129,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                       ep.id === currentEpisode.id && isPlaying
                       ? setPlayingState(false)
                       : playList(episodeList,index+latestEpisodes.length)}}>
-                      { ep.id === currentEpisode.id && !isPlaying ? 
+                      { ep.id === currentEpisode.id && isPlaying ? 
                         <img src="/pauseEpisodes.svg" alt="pause" className={styles.buttonPauseEpisode}/>
                         : <img src="/play-green.svg" alt="play episode" />}
                     </button>
