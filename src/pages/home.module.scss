@@ -11,6 +11,7 @@
 }
 
 .latestEpisodes{
+    
     ul{
         list-style: none;
         display: grid;
@@ -33,6 +34,11 @@
                 border-radius: 1rem;
             }
 
+            .buttonPauseEpisode{
+                max-width: 40%;
+                max-height: 50%;
+                border-radius: 0;
+            }
             .episodeDetails{
                 flex:1;
                 margin-left: 1rem;
@@ -177,5 +183,6 @@
     .buttonPauseEpisode{
         max-width: 40%;
         max-height: 50%;
+        border-radius: 0;
     }
 }

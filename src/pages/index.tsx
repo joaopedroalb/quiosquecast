@@ -77,8 +77,13 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{ep.durationStr}</span>
                 </div>
 
-                <button type="button" onClick={()=>{playList(episodeList,index)}}>
-                  <img src="/play-green.svg" alt="Play Episode"/>
+                <button type="button" onClick={()=>{
+                  ep.id === currentEpisode.id && isPlaying
+                  ? setPlayingState(false):
+                  playList(episodeList,index)}}>
+                    {ep.id === currentEpisode.id && isPlaying ? 
+                    <img src="/pauseEpisodes.svg" alt="pause" className={styles.buttonPauseEpisode}/>
+                    : <img src="/play-green.svg" alt="play episode" />}
                 </button>
               </li>
             )
