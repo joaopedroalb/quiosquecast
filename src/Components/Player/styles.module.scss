@@ -1,11 +1,62 @@
-.playerContainer{
+.allContainer{
     width: 26.5rem;
     height: 100vh;
-    padding: 3rem 4rem;
 
     background: var(--purple-500);
     color: var(--white);
+    display: flex;
+    align-items: center;
 
+    .iconController{
+        width: 5%;
+        display: flex;
+        justify-content: flex-start;
+        cursor: pointer;
+        padding-left: 0.5rem;
+
+        &:hover{
+            filter: brightness(0.825);;
+        }
+
+        .iconSelect{
+            cursor: pointer;
+        }
+    }
+}
+
+.allContainerOff{
+    width: 3rem;
+    height: 100vh;
+
+    background: var(--purple-500);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+
+    .iconController{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        padding-left: 0.5rem;
+
+        &:hover{
+            filter: brightness(0.825);;
+        }
+
+        .iconSelect{
+            cursor: pointer;
+        }
+    }
+}
+
+.playerContainer{
+    background: var(--purple-500);
+    color: var(--white);
+
+    height: 100vh;
+    width: 95%;
+    padding: 3rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,6 +83,10 @@
     }
 }
 
+.playerContainerOff{
+    display: none;
+}
+
 .currentEpisode{
     text-align: center;
 
@@ -56,7 +111,7 @@
 
 .emptyPlayer{
     cursor: pointer;
-    width: 98.5%;
+    width: 99.5%;
     height: 20rem;
     border: 5px dashed var(--purple-300);
     border-radius: 1.5rem;
@@ -129,7 +184,7 @@
         }
 
         &.playButton{
-            width: 4rem;
+            min-width: 4rem;
             height: 4rem;
             border-radius: 1rem;
             background-color: var(--purple-400);
